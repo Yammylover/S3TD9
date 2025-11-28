@@ -1,0 +1,7 @@
+#!/bin/bash
+echo $0
+echo $#
+echo $$
+for i in `seq $#`; do
+	echo ${!i}
+done
