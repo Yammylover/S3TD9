@@ -1,0 +1,24 @@
+#!/bin/bash
+if [ $# -ne 1 ]; then
+	echo >&2 "pas ou trop d'arguments"
+	exit 1
+fi
+
+files=$1
+
+if [ -f "$files" ]; then
+	echo >&2 "pas un fichier"
+	exit 2
+fi
+
+nbRows=$(wc -l < "$files")
+
+if [ $nbRows -lt 3 ] ; then
+	echo >&2 "pas assez de lignes"
+	exit 3
+fi
+
+#cat "$file" | head -n+2 #toutes sauf les n(2) dernières
+
+#cat "$file" | tail -n+3 #toutes sauf les n(3) premières
+cat "$files" | tail -n+3 | sort -nr -t ':' -k2
